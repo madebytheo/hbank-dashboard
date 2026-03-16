@@ -58,6 +58,8 @@ VARIABLES
   --weight-500: 500;
   --weight-700: 700;
   --weight-800: 800;
+  --radius-full: 9999px;
+  --avatar-size: 32px;
 }
 
 /*==============================
@@ -90,4 +92,18 @@ html {
 }
 .size-24 {
   font-size: var(--text-24);
+}
+
+/*==============================
+USER PROFILE COMPONENT
+==============================*/
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+.user-profile__image {
+  border-radius: var(--radius-full);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
 }
