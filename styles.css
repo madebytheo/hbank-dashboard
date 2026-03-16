@@ -90,7 +90,7 @@ h6 {
 VARIABLES
 ==============================*/
 :root {
-  --font-stack: "Outfit", sans-serif;
+  /* colors */
   --color-neutral-900: #262833;
   --color-neutral-800: #363843;
   --color-neutral-700: #4e505c;
@@ -101,22 +101,35 @@ VARIABLES
   --color-orange-500: #e9ae79;
   --color-purple-100: #e4d6f3;
   --color-purple-500: #a686c4;
+  /* font sizes */
   --text-16: 1rem;
   --text-20: 1.25rem;
   --text-24: 1.5rem;
+  /* font weights */
+  --weight-400: 400;
+  --weight-500: 500;
+  --weight-700: 700;
+  --weight-800: 800;
+  /* spacing */
   --space-4: 0.25rem;
   --space-8: 0.5rem;
   --space-12: 0.75rem;
   --space-16: 1rem;
   --space-20: 1.25rem;
   --space-24: 1.5rem;
-  --weight-400: 400;
-  --weight-500: 500;
-  --weight-700: 700;
-  --weight-800: 800;
-  --radius-full: 9999px;
+  /* radius */
+  --radius-s: 10px;
+  --radius-f: 9999px;
+  /* borders */
+  --layout-border: 1px solid var(--color-neutral-800);
+  --active-border: 2px solid var(--color-green-500);
+  /* random */
+  --font-stack: "Outfit", sans-serif;
   --avatar-size: 32px;
-  --border: 1px solid var(--color-neutral-800);
+  --mobile-touch-target: 44px;
+  --duration-fast: 180ms;
+  --width-f: 100%;
+  --press-scale: scale(0.95);
 }
 
 /*==============================
@@ -126,6 +139,13 @@ html {
   font-family: var(--font-stack);
   background: var(--color-neutral-900);
   color: var(--color-white);
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+*:focus-visible {
+  outline: var(--active-border);
 }
 
 /* UTILITY CLASSES */
@@ -151,7 +171,17 @@ html {
   font-size: var(--text-24);
 }
 .container {
-  padding: var(--space-24);
+  padding: var(--space-12);
+}
+@media (min-width: 768px) {
+  .container {
+    padding: var(--space-16);
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    padding: var(--space-24);
+  }
 }
 
 /*==============================
@@ -165,7 +195,7 @@ header {
 
 /* LAYOUT STYLING? */
 header {
-  border-bottom: var(--border);
+  border-bottom: var(--layout-border);
 }
 
 /*==============================
@@ -177,7 +207,56 @@ USER PROFILE COMPONENT
   gap: var(--space-12);
 }
 .user-profile__image {
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-f);
   width: var(--avatar-size);
   height: var(--avatar-size);
+}
+
+/*==============================
+NAV LINK COMPONENT
+==============================*/
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--mobile-touch-target);
+  min-height: var(--mobile-touch-target);
+  border-radius: var(--radius-s);
+  transition:
+    background-color var(--duration-fast) ease,
+    transform var(--duration-fast) ease,
+    opacity var(--duration-fast) ease;
+}
+.nav-link__icon {
+  transition:
+    transform var(--duration-fast) ease,
+    opacity var(--duration-fast) ease;
+}
+.nav-link__label {
+  display: none;
+}
+.nav-link--active {
+  background: color-mix(in srgb, var(--color-green-500) 16%, transparent);
+}
+.nav-link:active {
+  transform: var(--press-scale);
+}
+@media (min-width: 1024px) {
+  .nav-link {
+    justify-content: flex-start;
+    gap: var(--space-8);
+    width: unset;
+    min-height: unset;
+    padding: var(--space-8) var(--space-16);
+  }
+  .nav-link__label {
+    display: inline;
+  }
+}
+/* on real hover devices below adds a softer tint than active so the hover feels responsive but secondary */
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover {
+    background: color-mix(in srgb, var(--color-green-500) 12%, transparent);
+  }
 }
