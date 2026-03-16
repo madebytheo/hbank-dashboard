@@ -60,6 +60,7 @@ VARIABLES
   --weight-800: 800;
   --radius-full: 9999px;
   --avatar-size: 32px;
+  --border: 1px solid var(--color-neutral-800);
 }
 
 /*==============================
@@ -92,6 +93,23 @@ html {
 }
 .size-24 {
   font-size: var(--text-24);
+}
+.container {
+  padding: var(--space-24);
+}
+
+/*==============================
+LAYOUT
+==============================*/
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LAYOUT STYLING? */
+header {
+  border-bottom: var(--border);
 }
 
 /*==============================
