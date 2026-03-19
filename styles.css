@@ -107,11 +107,13 @@ VARIABLES
   --text-16: 1rem;
   --text-20: 1.25rem;
   --text-24: 1.5rem;
-  /* font weights */
+  /* font */
   --weight-400: 400;
   --weight-500: 500;
   --weight-700: 700;
   --weight-800: 800;
+  --line-height: 1.5;
+  --rest-line-height: 1;
   /* spacing */
   --space-2: 0.125rem;
   --space-4: 0.25rem;
@@ -135,27 +137,44 @@ VARIABLES
   --avatar-size: 32px;
   --mobile-touch-target: 44px;
   --duration-fast: 180ms;
-  --width-f: 100%;
   --press-scale: scale(0.95);
   --button-icon-width: 12px;
-  --rest-line-height: 1;
   --bank-card-max-width: 288px;
+  /* layout */
+  --grid-rows: auto minmax(0, 1fr);
+  --grid-cols: auto minmax(0, 1fr);
+  --no-overflow: hidden;
+  --auto-overflow: auto;
+  --width-f: 100%;
+  --height-f: 100%;
+  --min-height-f: 100dvh;
 }
 
 /*==============================
 GLOBAL STYLES
 ==============================*/
 html {
+  height: var(--height-f);
   font-family: var(--font-stack);
   background: var(--color-neutral-900);
   color: var(--color-white);
+}
+body {
+  height: var(--min-height-f);
+  min-height: var(--min-height-f);
+  display: grid;
+  grid-template-rows: var(--grid-rows);
+  overflow: var(--no-overflow);
+  line-height: var(--line-height);
+  -webkit-font-smoothing: antialiased; /* i dont think this does shit but AI put it here */
 }
 a {
   text-decoration: none;
   color: inherit;
 }
 *:focus-visible {
-  outline: var(--active-border);
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-green-500);
 }
 button {
   border: none;
@@ -166,6 +185,13 @@ button {
 }
 button:hover {
   cursor: pointer;
+}
+ul {
+  padding: 0;
+  margin: 0;
+}
+li {
+  list-style: none;
 }
 
 /* UTILITY CLASSES */
@@ -211,6 +237,13 @@ button:hover {
 /*==============================
 LAYOUT
 ==============================*/
+.app-layout {
+  min-height: 0;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: var(--grid-cols);
+  overflow: var(--no-overflow);
+}
 header {
   display: flex;
   align-items: center;
@@ -220,6 +253,18 @@ header {
 /* LAYOUT STYLING? */
 header {
   border-bottom: var(--layout-border);
+}
+nav {
+  border-right: var(--layout-border);
+  min-height: 0;
+  overflow: var(--no-overflow);
+  display: inline-flex;
+  flex-direction: column;
+}
+main {
+  min-width: 0;
+  min-height: 0;
+  overflow-y: var(--auto-overflow);
 }
 
 /*==============================
@@ -239,22 +284,48 @@ USER PROFILE COMPONENT
 /*==============================
 NAV GROUP COMPONENT
 ==============================*/
+.nav-scroll {
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-36);
+  scrollbar-color: transparent transparent;
+}
+.nav-section--footer {
+  margin-top: auto;
+  margin-bottom: 0;
+  flex-shrink: 0;
+  padding-top: var(--space-12);
+}
+@media (min-width: 768px) {
+  .nav-section--footer {
+    padding-top: var(--space-16);
+  }
+}
+@media (min-width: 1024px) {
+  .nav-section--footer {
+    padding-top: var(--space-24);
+  }
+}
 .nav-group {
-  margin-bottom: var(--space-36);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
 }
 .nav-group__label {
-  visibility: hidden;
+  display: none;
   color: var(--color-off-white);
   font-size: var(--text-10);
   text-transform: uppercase;
-  margin-bottom: var(--space-24);
+  margin-bottom: var(--space-16);
 }
-.nav-group:last-of-type {
+.nav-section:last-of-type {
   margin-bottom: 0;
 }
 @media (min-width: 1024px) {
   .nav-group__label {
-    visibility: visible;
+    display: block;
   }
 }
 
@@ -263,7 +334,7 @@ NAV LINK COMPONENT
 ==============================*/
 .nav-link {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: var(--mobile-touch-target);
@@ -308,6 +379,15 @@ NAV LINK COMPONENT
 }
 
 /*==============================
+NEW LINK COMPONENT
+==============================*/
+.new-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*==============================
 BUTTON COMPONENT
 ==============================*/
 .btn--green {
@@ -348,6 +428,14 @@ BADGE COMPONENT
 .badge--purple {
   background: var(--color-purple-100);
   color: var(--color-neutral-900);
+}
+#new-badge {
+  display: none;
+}
+@media (min-width: 1024px) {
+  #new-badge {
+    display: block;
+  }
 }
 
 /*==============================
