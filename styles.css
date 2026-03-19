@@ -303,6 +303,9 @@ BUTTON COMPONENT
   background: url("./assets/icons/arrow-right.svg") center / contain no-repeat;
   transition: transform var(--duration-fast) ease;
 }
+.btn--icon:active::after {
+  transform: translateX(var(--space-2));
+}
 @media (hover: hover) and (pointer: fine) {
   .btn--icon:hover::after {
     transform: translateX(var(--space-2));
