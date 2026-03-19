@@ -111,6 +111,7 @@ VARIABLES
   --weight-700: 700;
   --weight-800: 800;
   /* spacing */
+  --space-2: 0.125rem;
   --space-4: 0.25rem;
   --space-8: 0.5rem;
   --space-12: 0.75rem;
@@ -130,6 +131,7 @@ VARIABLES
   --duration-fast: 180ms;
   --width-f: 100%;
   --press-scale: scale(0.95);
+  --button-icon-width: 12px;
 }
 
 /*==============================
@@ -146,6 +148,16 @@ a {
 }
 *:focus-visible {
   outline: var(--active-border);
+}
+button {
+  border: none;
+  border-radius: var(--radius-f);
+  padding: var(--space-4) var(--space-16);
+  color: var(--color-neutral-900);
+  font-weight: var(--weight-500);
+}
+button:hover {
+  cursor: pointer;
 }
 
 /* UTILITY CLASSES */
@@ -258,5 +270,30 @@ NAV LINK COMPONENT
 @media (hover: hover) and (pointer: fine) {
   .nav-link:hover {
     background: color-mix(in srgb, var(--color-green-500) 12%, transparent);
+  }
+}
+
+/*==============================
+BUTTON COMPONENT
+==============================*/
+.btn--green {
+  background: var(--color-green-100);
+}
+.btn--icon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+.btn--icon::after {
+  content: "";
+  width: var(--button-icon-width);
+  height: var(--button-icon-width);
+  flex-shrink: 0;
+  background: url("./assets/icons/arrow-right.svg") center / contain no-repeat;
+  transition: transform var(--duration-fast) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn--icon:hover::after {
+    transform: translateX(var(--space-2));
   }
 }
