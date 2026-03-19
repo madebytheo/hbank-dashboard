@@ -121,6 +121,7 @@ VARIABLES
   --space-24: 1.5rem;
   /* radius */
   --radius-s: 10px;
+  --radius-l: 20px;
   --radius-f: 9999px;
   /* borders */
   --layout-border: 1px solid var(--color-neutral-800);
@@ -185,6 +186,10 @@ button:hover {
 }
 .container {
   padding: var(--space-12);
+}
+.container--card {
+  border: var(--layout-border);
+  border-radius: var(--radius-l);
 }
 @media (min-width: 768px) {
   .container {
