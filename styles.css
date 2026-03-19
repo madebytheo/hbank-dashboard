@@ -405,3 +405,39 @@ BANK CARD COMPONENT
 .bank-card__bottom--orange {
   background: var(--color-orange-500);
 }
+
+/*==============================
+BALANCE COMPONENT
+==============================*/
+.balance {
+  display: flex;
+  color: var(--color-neutral-900);
+  font-weight: var(--weight-500);
+}
+.balance__left,
+.balance__right {
+  padding: var(--space-24);
+  display: flex;
+  flex: 1;
+}
+.balance__left {
+  background: var(--color-green-100);
+  flex-direction: column;
+  gap: var(--space-16);
+  border-top-left-radius: var(--radius-m);
+  border-bottom-left-radius: var(--radius-m);
+}
+.balance__value {
+  font-size: var(--text-24);
+  font-weight: var(--weight-700);
+}
+.balance__right {
+  background: var(--color-green-500);
+  align-items: flex-end;
+  justify-content: flex-end;
+  border-top-right-radius: var(--radius-m);
+  border-bottom-right-radius: var(--radius-m);
+  background-image: url(./assets/icons/background-decor.svg);
+  background-repeat: no-repeat;
+  background-position: right top;
+}
