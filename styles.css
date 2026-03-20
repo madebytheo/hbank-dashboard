@@ -132,6 +132,7 @@ VARIABLES
   /* borders */
   --layout-border: 1px solid var(--color-neutral-800);
   --active-border: 2px solid var(--color-green-500);
+  --dashed-border: 1px dashed var(--color-neutral-800);
   /* random */
   --font-stack: "Outfit", sans-serif;
   --avatar-size: 32px;
@@ -140,6 +141,8 @@ VARIABLES
   --press-scale: scale(0.95);
   --button-icon-width: 12px;
   --bank-card-max-width: 288px;
+  --bank-card-min-height: 209px;
+  --progress-bar-height: 8px;
   /* layout */
   --grid-rows: auto minmax(0, 1fr);
   --grid-cols: auto minmax(0, 1fr);
@@ -193,6 +196,11 @@ ul {
 li {
   list-style: none;
 }
+hr {
+  border: none;
+  height: 1px;
+  background: var(--color-neutral-800);
+}
 
 /* UTILITY CLASSES */
 .regular {
@@ -207,6 +215,9 @@ li {
 .extra-bold {
   font-weight: var(--weight-800);
 }
+.size-10 {
+  font-size: var(--text-10);
+}
 .size-16 {
   font-size: var(--text-16);
 }
@@ -215,6 +226,33 @@ li {
 }
 .size-24 {
   font-size: var(--text-24);
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.mb-8 {
+  margin-bottom: var(--space-8);
+}
+.col-3 {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+.col-3 > div {
+  padding: 0 var(--space-12);
+  border-right: var(--layout-border);
+}
+.col-3 > div:first-child {
+  padding-left: 0;
+}
+.col-3 > div:last-child {
+  padding-right: 0;
+  border-right: none;
+}
+.badged-title {
+  display: flex;
+  gap: var(--space-8);
+  align-items: center;
 }
 .container {
   padding: var(--space-12);
@@ -249,6 +287,48 @@ header {
   align-items: center;
   justify-content: space-between;
 }
+main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+.cards,
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12);
+}
+.stats {
+  justify-content: space-between;
+}
+@media (min-width: 768px) {
+  main,
+  .cards,
+  .stats {
+    gap: var(--space-16);
+  }
+}
+@media (min-width: 820px) {
+  main {
+    flex-direction: row-reverse;
+    align-items: flex-start;
+  }
+  #card-details {
+    flex: 0 1 calc(var(--bank-card-max-width) + (var(--space-24) * 2));
+    max-width: calc(var(--bank-card-max-width) + (var(--space-24) * 2));
+  }
+  #account-overview {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+@media (min-width: 1024px) {
+  main,
+  .cards,
+  .stats {
+    gap: var(--space-24);
+  }
+}
 
 /* LAYOUT STYLING? */
 header {
@@ -265,6 +345,34 @@ main {
   min-width: 0;
   min-height: 0;
   overflow-y: var(--auto-overflow);
+  scrollbar-color: var(--color-neutral-800) transparent;
+}
+#card-details,
+#account-overview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.card-details-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+}
+.card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+@media (min-width: 611px) {
+  .card-meta {
+    margin: 0 auto;
+  }
+}
+@media (min-width: 820px) {
+  .card-meta {
+    margin: unset;
+  }
 }
 
 /*==============================
@@ -474,8 +582,13 @@ STAT COMPONENT
 /*==============================
 BANK CARD COMPONENT
 ==============================*/
-.bank-card {
+.bank-card,
+.add-card {
   max-width: var(--bank-card-max-width);
+  width: var(--width-f);
+  min-height: var(--bank-card-min-height);
+}
+.bank-card {
   color: var(--color-neutral-900);
 }
 .bank-card__top,
@@ -519,12 +632,39 @@ BANK CARD COMPONENT
 .bank-card__bottom--orange {
   background: var(--color-orange-500);
 }
+.add-card {
+  border: var(--dashed-border);
+  border-radius: var(--radius-m);
+  background: transparent;
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-24);
+  transition:
+    border-color var(--duration-fast) ease,
+    color var(--duration-fast) ease,
+    transform var(--duration-fast) ease;
+}
+.add-card__content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+}
+.add-card:hover {
+  border-color: var(--color-white);
+}
+.add-card:active {
+  transform: var(--press-scale);
+}
 
 /*==============================
 BALANCE COMPONENT
 ==============================*/
 .balance {
   display: flex;
+  flex-direction: column;
   color: var(--color-neutral-900);
   font-weight: var(--weight-500);
 }
@@ -539,7 +679,7 @@ BALANCE COMPONENT
   flex-direction: column;
   gap: var(--space-16);
   border-top-left-radius: var(--radius-m);
-  border-bottom-left-radius: var(--radius-m);
+  border-top-right-radius: var(--radius-m);
 }
 .balance__value {
   font-size: var(--text-24);
@@ -549,9 +689,37 @@ BALANCE COMPONENT
   background: var(--color-green-500);
   align-items: flex-end;
   justify-content: flex-end;
-  border-top-right-radius: var(--radius-m);
+  border-bottom-left-radius: var(--radius-m);
   border-bottom-right-radius: var(--radius-m);
   background-image: url(./assets/icons/background-decor.svg);
   background-repeat: no-repeat;
   background-position: right top;
+}
+@media (min-width: 425px) {
+  .balance {
+    flex-direction: row;
+  }
+  .balance__left {
+    border-radius: var(--radius-m) 0 0 var(--radius-m);
+  }
+  .balance__right {
+    border-radius: 0 var(--radius-m) var(--radius-m) 0;
+  }
+}
+
+/*==============================
+PROGRESS BAR COMPONENT
+==============================*/
+.progress-bar,
+.progress-bar__progress {
+  height: var(--progress-bar-height);
+  border-radius: var(--radius-f);
+}
+.progress-bar {
+  width: var(--width-f);
+  background: var(--color-white);
+}
+.progress-bar__progress {
+  background: var(--color-orange-500);
+  width: 62%; /* just a random number that popped into my head */
 }

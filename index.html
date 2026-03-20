@@ -184,7 +184,171 @@
         </section>
       </nav>
 
-      <main class="container" aria-label="Dashboard content"></main>
+      <main class="container" aria-label="Dashboard content">
+        <section class="container container--card" id="card-details">
+          <h2 class="size-16 bold">Card Details</h2>
+
+          <div class="card-details-row">
+            <!-- bank card component -->
+            <div class="bank-card">
+              <div class="bank-card__top bank-card__top--green">
+                <div>
+                  <p>Shopping Card</p>
+                  <img src="./assets/icons/card.svg" alt="" />
+                </div>
+                <div>
+                  <p>NAME</p>
+                  <p>Exp 26/06</p>
+                </div>
+              </div>
+              <div class="bank-card__bottom bank-card__bottom--green">
+                <p class="size-20 bold">**** **** 0928</p>
+                <img src="./assets/icons/visa-logo.svg" alt="" />
+              </div>
+            </div>
+
+            <div class="card-meta">
+              <div>
+                <h3 class="size-10 medium uppercase mb-8">Card Number</h3>
+                <p class="size-20 bold">**** **** 0928</p>
+              </div>
+
+              <div class="col-3">
+                <div>
+                  <h3 class="size-10 medium uppercase mb-8">Expire Date</h3>
+                  <p class="size-16 bold">26/06</p>
+                </div>
+                <div>
+                  <h3 class="size-10 medium uppercase mb-8">CVV</h3>
+                  <p class="size-16 bold">123</p>
+                </div>
+                <div>
+                  <h3 class="size-10 medium uppercase mb-8">Level</h3>
+                  <p class="size-16 bold">02</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+
+          <h2 class="size-16 bold">Spending Limits</h2>
+          <div>
+            <h3 class="size-10 medium uppercase mb-8">
+              Daily Transaction Limit
+            </h3>
+
+            <div class="progress-bar mb-8">
+              <div class="progress-bar__progress"></div>
+            </div>
+
+            <p>$1240 spent of $2000</p>
+          </div>
+        </section>
+
+        <section class="container container--card" id="account-overview">
+          <h2 class="size-16 bold">Account Overview</h2>
+
+          <!-- balance component -->
+          <div class="balance">
+            <div class="balance__left">
+              <p>Your balance:</p>
+              <p class="balance__value">$25,330</p>
+              <p>3 cards</p>
+            </div>
+            <div class="balance__right">
+              <!-- button component -->
+              <button class="btn--green btn--icon">Details</button>
+            </div>
+          </div>
+
+          <div class="badged-title">
+            <h2 class="size-16 bold">Cards</h2>
+            <span class="badge">3</span>
+          </div>
+
+          <div class="cards">
+            <!-- bank card component -->
+            <div class="bank-card">
+              <div class="bank-card__top bank-card__top--purple">
+                <div>
+                  <p>Shopping Card</p>
+                  <img src="./assets/icons/card.svg" alt="" />
+                </div>
+                <div>
+                  <p>NAME</p>
+                  <p>Exp 26/6</p>
+                </div>
+              </div>
+              <div class="bank-card__bottom bank-card__bottom--purple">
+                <p class="size-20 bold">**** **** 0928</p>
+                <img src="./assets/icons/visa-logo.svg" alt="" />
+              </div>
+            </div>
+
+            <!-- bank card component  -->
+            <div class="bank-card">
+              <div class="bank-card__top bank-card__top--orange">
+                <div>
+                  <p>Shopping Card</p>
+                  <img src="./assets/icons/card.svg" alt="" />
+                </div>
+                <div>
+                  <p>NAME</p>
+                  <p>Exp 26/6</p>
+                </div>
+              </div>
+              <div class="bank-card__bottom bank-card__bottom--orange">
+                <p class="size-20 bold">**** **** 0928</p>
+                <img src="./assets/icons/visa-logo.svg" alt="" />
+              </div>
+            </div>
+
+            <!-- add card button -->
+            <button class="add-card" type="button">
+              <span class="add-card__content">
+                <img src="./assets/icons/plus.svg" alt="" aria-hidden="true" />
+                <span class="medium">Add Card</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="container container--card stats">
+            <!-- stat component -->
+            <div class="stat">
+              <div class="stat__icon-wrapper stat__icon-wrapper--green">
+                <img src="./assets/icons/trend-line-dark.svg" alt="" />
+              </div>
+              <div>
+                <p class="stat__label">Earnings</p>
+                <p class="stat__value">$12,341</p>
+              </div>
+            </div>
+
+            <!-- stat component -->
+            <div class="stat">
+              <div class="stat__icon-wrapper stat__icon-wrapper--purple">
+                <img src="./assets/icons/coin.svg" alt="" />
+              </div>
+              <div>
+                <p class="stat__label">Spendings</p>
+                <p class="stat__value">$4,009</p>
+              </div>
+            </div>
+
+            <!-- stat component -->
+            <div class="stat">
+              <div class="stat__icon-wrapper stat__icon-wrapper--orange">
+                <img src="./assets/icons/scope.svg" alt="" />
+              </div>
+              <div>
+                <p class="stat__label">Goals</p>
+                <p class="stat__value">$8,098</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   </body>
 </html>
